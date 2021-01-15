@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <div th:fragment="main-nav">
+        <h1>dddd</h1>
+        <a href="#" class="btn btn-primary">얼굴 부위정보 등록</a>
+        <a href="#" class="btn btn-primary">부위 상세정보 등록</a>
+        <a href="#" class="btn btn-danger" onclick="document.getElementById('logout').submit();">로그아웃</a>
+        <form id="logout" th:action="@{/logout}" method="POST">
+        </form>
+    </div>
+</html>
