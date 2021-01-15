@@ -15,6 +15,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .mvcMatchers("/boc/password-change").permitAll()
+                .mvcMatchers("/boc/main").permitAll() // todo 지우기
+                .mvcMatchers("/boc/face-section").permitAll() // todo 지우기
+                .mvcMatchers("/boc/face-section-detail").permitAll() // todo 지우기
                 .mvcMatchers("/boc/**").authenticated()
                 .anyRequest().permitAll();
 

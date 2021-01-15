@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "userId")
 public class Admin {
     @Id
     private String userId;

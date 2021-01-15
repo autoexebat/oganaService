@@ -1,4 +1,4 @@
-package com.ogana.domain;
+package com.ogana.front.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

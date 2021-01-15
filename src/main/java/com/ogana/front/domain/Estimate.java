@@ -1,6 +1,5 @@
-package com.ogana.domain;
+package com.ogana.front.domain;
 
-import com.ogana.domain.face.FaceSection;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -10,15 +9,15 @@ import java.util.List;
 @Getter
 public class Estimate {
     private CustomerInfo user;
-    private List<FaceSection> faceSection;
+    private List<FaceSectionDto> faceSectionDto;
     private BigDecimal totalPrice;
     private LocalDateTime startReserveDt;
     private LocalDateTime endReserveDt;
     private LocalDateTime creatDate = LocalDateTime.now();
 
-    public Estimate(CustomerInfo user, List<FaceSection> faceSection) {
+    public Estimate(CustomerInfo user, List<FaceSectionDto> faceSectionDto) {
         this.user = user;
-        this.faceSection = faceSection;
+        this.faceSectionDto = faceSectionDto;
     }
 
     /**
@@ -26,7 +25,7 @@ public class Estimate {
      * @return
      */
     public int totalFaceSectionCount() {
-        return faceSection.size();
+        return faceSectionDto.size();
     }
 
     /**
@@ -34,7 +33,7 @@ public class Estimate {
      * @return
      */
     public int totalFaceDetailSectionCount() {
-        return faceSection.stream().map(detail -> detail.getSectionList().size())
+        return faceSectionDto.stream().map(detail -> detail.getSectionList().size())
                 .reduce((size1, size2) -> size1 + size2)
                 .orElse(0);
     }
@@ -43,7 +42,7 @@ public class Estimate {
      * @return
      */
     public BigDecimal getTotalPrice() {
-        return faceSection.stream().map(detail -> detail.getTotalPrice())
+        return faceSectionDto.stream().map(detail -> detail.getTotalPrice())
                 .reduce((fs1, fs2) -> fs1.add(fs2))
                 .orElse(new BigDecimal(0));
     }
