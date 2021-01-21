@@ -15,7 +15,7 @@ public class FaceSectionDetailDto {
     private BigDecimal price;
 
     public FaceSectionDetail toEntity() {
-        return new FaceSectionDetail(detailName, price);
+        return new FaceSectionDetail(id, detailName, price);
     }
 
 }
