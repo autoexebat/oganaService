@@ -1,15 +1,17 @@
 package com.ogana.backoffice.domain;
 
 import lombok.Getter;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Entity
+@NoArgsConstructor
 public class FaceSection {
-    @Id
-    private String code;
-    private String name;
+    private Long id;
+    private String fsCode;
+    private String sectionName;
+
+    public FaceSection(String sectionName) {
+        this.sectionName = sectionName;
+    }
 
 }

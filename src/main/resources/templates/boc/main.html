@@ -14,18 +14,19 @@
 
 <body>
     <h1>전체보기</h1>
-    <a href="/boc/faceInfo" class="btn btn-primary">조회</a>
-    <a href="/boc/face-section" class="btn btn-primary">얼굴부위 수정 및 얼굴상세 연결</a>
-    <a href="/boc/face-section-detail" class="btn btn-primary">얼굴부위 상세수정</a>
+    <a href="/boc/faceInfo" class="btn btn-outline-primary">조회</a>
+    <a href="/boc/face-section" class="btn btn-outline-primary">얼굴부위 수정 및 얼굴상세 연결</a>
+    <a href="/boc/face-section-detail" class="btn btn-outline-primary">얼굴부위 상세수정</a>
     <a href="#" class="btn btn-danger" onclick="document.getElementById('logout').submit();">로그아웃</a>
     <form id="logout" th:action="@{/logout}" method="POST">
     </form>
+    <br>
 
     <div id="wrapper"></div>
 
 </body>
 </html>
-<script>
+<script type="text/javascript">
     var grid = new tui.Grid({
         el: document.getElementById('wrapper'),
         rowHeaders: ['checkbox'],

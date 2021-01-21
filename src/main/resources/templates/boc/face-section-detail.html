@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
@@ -11,65 +13,99 @@
 </head>
 <body>
     <h1>얼굴부위 상세</h1>
-    <a href="#" class="btn btn-primary">조회</a>
-    <a href="#" class="btn btn-primary">저장</a>
-    <a href="#" class="btn btn-primary">삭제</a>
+    <a href="javascript:;" id="search" class="btn btn-outline-primary">조회</a>
+    <a href="javascript:;" id="add" class="btn btn-outline-primary">추가</a>
+    <a href="javascript:;" id="update" class="btn btn-outline-primary">저장</a>
+    <a href="javascript:;" id="delete" class="btn btn-outline-primary">삭제</a>
+    <br><br>
     <div id="wrapper"></div>
 </body>
 </html>
-<script>
+<script type="text/javascript">
+
     var grid = new tui.Grid({
         el: document.getElementById('wrapper'),
         rowHeaders: ['checkbox'],
         bodyHeight: 500,
-        treeColumnOptions: {
-            name: 'sectionName',
-        },
-        data: [
-            // api: {
-            //     readData: {url: '/boc/search/faceInfo', method: 'GET'}
-            // }
-            {
-                "id": 1,
-                "sectionName": "f1"
-            },
-            {
-                "id": 2,
-                "sectionName": "f2",
-                _attributes: {
-                    expanded: true // default: false
-                },
-                _children: [
-                    {
-                        "detailName" : "상세1",
-                        "price": 100
-                    },
-                    {
-                        "detailName" : "상세2",
-                        "price": 200
-                    }
-                ]
-            },
-            {
-                "id": 3,
-                "sectionName": "f2"
+        data: {
+            api: {
+                readData: {url: '/boc/search/face-section-detail', method: 'GET'}
             }
-        ],
+        },
         scrollX: false,
         scrollY: false,
         columns: [
             {
-                header: '부위',
-                name: 'sectionName'
+                header: 'id',
+                name: 'id'
             },
             {
-                header: '부위상세',
-                name: 'detailName'
+                header: '상세 부위명',
+                name: 'detailName',
+                editor:'text'
             },
             {
                 header: '가격',
-                name: 'price'
+                name: 'price',
+                editor:'text'
             }
         ]
     });
+
+    grid.hideColumn('id');
+    grid.on('afterChange', function(event){
+        $.each(event.changes, (index, el) => {
+            grid.check(el.rowKey);
+        })
+    });
+
+
+    $('#search').click(function(el){
+        $.ajax({
+            url: '/boc/search/face-section-detail',
+            type : "GET",
+            dataType: 'json',
+            success: function (res, textStatus, jqXHR) {
+                grid.resetData(res.data.contents);
+            }
+        });
+    })
+
+    $('#add').click(() => grid.appendRow())
+
+    $('#update').click(function(el){
+        var updateList = grid.getCheckedRows();
+        if(confirm('수정 하시겠습니까?')) {
+            $.ajax({
+                url: '/boc/update/face-section-detail',
+                type: "PUT",
+                data: JSON.stringify({'updatedRows': updateList}),
+                dataType: 'json',
+                contentType: 'application/json',
+                async: false,
+                success: function (res, textStatus, jqXHR) {
+                    alert('수정 되었습니다');
+                }
+            });
+            $('#search').trigger('click');
+        }
+    })
+    $('#delete').click(function(el){
+        var deleteList = grid.getCheckedRows();
+        if(confirm('삭제하겠습니까?')) {
+            $.ajax({
+                url: '/boc/delete/face-section-detail',
+                type: "DELETE",
+                data: JSON.stringify({'deletedRows': deleteList}),
+                dataType: 'json',
+                contentType: 'application/json',
+                async: false,
+                success: function (res, textStatus, jqXHR) {
+                    alert('삭제 되었습니다');
+                }
+            });
+            $('#search').trigger('click');
+        }
+    })
+
 </script>

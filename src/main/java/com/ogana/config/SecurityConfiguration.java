@@ -13,14 +13,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http
+                .csrf().disable()
+                .authorizeRequests()
                 .mvcMatchers("/boc/password-change").permitAll()
                 .mvcMatchers("/boc/main").permitAll() // todo 지우기
                 .mvcMatchers("/boc/face-section").permitAll() // todo 지우기
                 .mvcMatchers("/boc/face-section-detail").permitAll() // todo 지우기
-                .mvcMatchers("/boc/**").authenticated()
+                .antMatchers("/h2-console/*").permitAll() // todo 지우기
+//                .mvcMatchers("/boc/**").authenticated()
                 .anyRequest().permitAll();
-
+        
+        http.headers().frameOptions().disable(); // todo 지우기
+        
         http.formLogin()
                 .loginPage("/boc/login").permitAll()
                 .defaultSuccessUrl("/boc/main");

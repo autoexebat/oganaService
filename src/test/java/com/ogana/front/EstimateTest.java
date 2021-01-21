@@ -2,7 +2,7 @@ package com.ogana.front;
 
 import com.ogana.front.domain.CustomerInfo;
 import com.ogana.front.domain.Estimate;
-import com.ogana.front.domain.FaceDetailSectionDto;
+import com.ogana.front.domain.FaceSectionDetailDto;
 import com.ogana.front.domain.FaceSectionDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,12 +18,12 @@ class EstimateTest {
 
     @BeforeEach
     void bf() {
-        FaceDetailSectionDto f1 = new FaceDetailSectionDto("a", new BigDecimal(100));
-        FaceDetailSectionDto f2 = new FaceDetailSectionDto("a", new BigDecimal(10));
-        FaceDetailSectionDto f3 = new FaceDetailSectionDto("a", new BigDecimal(10));
-        FaceDetailSectionDto f4 = new FaceDetailSectionDto("a", new BigDecimal(10));
-        FaceDetailSectionDto f5 = new FaceDetailSectionDto("a", new BigDecimal(10));
-        FaceDetailSectionDto f6 = new FaceDetailSectionDto("a", new BigDecimal(50));
+        FaceSectionDetailDto f1 = new FaceSectionDetailDto("a", new BigDecimal(100));
+        FaceSectionDetailDto f2 = new FaceSectionDetailDto("a", new BigDecimal(10));
+        FaceSectionDetailDto f3 = new FaceSectionDetailDto("a", new BigDecimal(10));
+        FaceSectionDetailDto f4 = new FaceSectionDetailDto("a", new BigDecimal(10));
+        FaceSectionDetailDto f5 = new FaceSectionDetailDto("a", new BigDecimal(10));
+        FaceSectionDetailDto f6 = new FaceSectionDetailDto("a", new BigDecimal(50));
         FaceSectionDto fs1 = new FaceSectionDto("A", List.of(f1, f2));
         FaceSectionDto fs2 = new FaceSectionDto("A", List.of(f3, f4));
         FaceSectionDto fs3 = new FaceSectionDto("A", List.of(f5));

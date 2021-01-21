@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @Getter
 @AllArgsConstructor
-public class FaceDetailSectionDto {
+public class FaceSectionDetailDto {
     private String name;
     private BigDecimal price;
 }
