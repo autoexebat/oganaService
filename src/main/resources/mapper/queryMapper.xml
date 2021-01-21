@@ -12,12 +12,12 @@
                   , MOD_DTS
             FROM FACE_SECTION_DETAIL
     </select>
-    <select id="deleteFSD" parameterType="int" resultType="int">
+    <select id="deleteFSD" parameterType="long">
             DELETE FROM FACE_SECTION_DETAIL
             WHERE 1  = 1
             AND   ID = #{id}
     </select>
-    <insert id="mergeFSD" parameterType="com.ogana.backoffice.domain.FaceSectionDetail">
+    <insert id="mergeFSDTemp" parameterType="com.ogana.backoffice.domain.FaceSectionDetail">
         MERGE INTO FACE_SECTION_DETAIL FSD
         USING(
             SELECT
@@ -44,5 +44,23 @@
                 , SYSDATE
                 , SYSDATE
             )
+    </insert>
+    <insert id="insertFSD" parameterType="com.ogana.backoffice.domain.FaceSectionDetail">
+        INSERT INTO FACE_SECTION_DETAIL
+            VALUES(
+                  (SELECT NVL(MAX(ID)+1, 1) FROM FACE_SECTION_DETAIL)
+                , #{detailName}
+                , #{price}
+                , ''
+                , SYSDATE
+                , SYSDATE
+            )
+    </insert>
+    <insert id="updateFSD" parameterType="com.ogana.backoffice.domain.FaceSectionDetail">
+        UPDATE FACE_SECTION_DETAIL
+        SET   DETAIL_NAME = #{detailName}
+            , PRICE = #{price}
+            , MOD_DTS = SYSDATE
+        WHERE ID = #{id}
     </insert>
 </mapper>
