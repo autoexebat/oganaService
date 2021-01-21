@@ -28,10 +28,10 @@ public class FSDService {
 
         List<FaceSectionDetail> list = List.of(f1, f2, f3, f4);
 
-        mapper.mergeFSD(f1);
-        mapper.mergeFSD(f2);
-        mapper.mergeFSD(f3);
-        mapper.mergeFSD(f4);
+        mapper.insertFSD(f1);
+        mapper.insertFSD(f2);
+        mapper.insertFSD(f3);
+        mapper.insertFSD(f4);
 
         return list;
     }
@@ -39,7 +39,11 @@ public class FSDService {
     @Transactional
     public void update(List<FaceSectionDetailDto> updatedRows) {
         for(FaceSectionDetailDto dto : updatedRows) {
-            mapper.mergeFSD(dto.toEntity());
+            if(dto.getId() == null) {
+                mapper.insertFSD(dto.toEntity());
+            } else {
+                mapper.updateFSD(dto.toEntity());
+            }
         }
     }
 

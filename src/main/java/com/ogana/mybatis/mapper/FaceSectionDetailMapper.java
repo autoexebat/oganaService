@@ -8,6 +8,8 @@ import java.util.List;
 @Mapper
 public interface FaceSectionDetailMapper {
     List<FaceSectionDetail> selectFSD();
-    int deleteFSD(Long id);
+    void deleteFSD(Long id);
     int mergeFSD(FaceSectionDetail fsd);
+    int insertFSD(FaceSectionDetail fsd);
+    int updateFSD(FaceSectionDetail fsd);
 }
