@@ -11,9 +11,11 @@
 </head>
 <body>
     <h1>얼굴부위</h1>
-    <a href="#" class="btn btn-primary">조회</a>
-    <a href="#" class="btn btn-primary">저장</a>
-    <a href="#" class="btn btn-primary">삭제</a>
+    <a href="javascript:;" id="search" class="btn btn-outline-primary">조회</a>
+    <a href="javascript:;" id="add" class="btn btn-outline-primary">추가</a>
+    <a href="javascript:;" id="update" class="btn btn-outline-primary">저장</a>
+    <a href="javascript:;" id="delete" class="btn btn-outline-primary">삭제</a>
+    <br><br>
     <div id="wrapper"></div>
 </body>
 </html>
@@ -23,54 +25,31 @@
         el: document.getElementById('wrapper'),
         rowHeaders: ['checkbox'],
         bodyHeight: 500,
-        treeColumnOptions: {
-            name: 'sectionName',
-        },
-        data: [
-            // api: {
-            //     readData: {url: '/boc/search/faceInfo', method: 'GET'}
-            // }
-            {
-                "id": 1,
-                "sectionName": "f1"
-            },
-            {
-                "id": 2,
-                "sectionName": "f2",
-                _attributes: {
-                    expanded: true // default: false
-                },
-                _children: [
-                    {
-                        "detailName" : "상세1",
-                        "price": 100
-                    },
-                    {
-                        "detailName" : "상세2",
-                        "price": 200
-                    }
-                ]
-            },
-            {
-                "id": 3,
-                "sectionName": "f2"
+        data: {
+            api: {
+                readData: {url: '/boc/search/face-section', method: 'GET'}
             }
-        ],
+        },
         scrollX: false,
         scrollY: false,
         columns: [
             {
-                header: '부위',
-                name: 'sectionName'
+                header: 'id',
+                name: 'id'
             },
             {
-                header: '부위상세',
-                name: 'detailName'
+                header: '부위명',
+                name: 'sectionName',
+                editor:'text'
             },
             {
-                header: '가격',
-                name: 'price'
+                header: '부위 상세 보기',
+                name: 'link'
             }
         ]
+    });
+
+    grid.on('click', function(event){
+        debugger
     });
 </script>

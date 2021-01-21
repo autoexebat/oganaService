@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ogana.mybatis.mapper.FaceSectionDetailMapper">
+    <select id="selectFSD" resultType="com.ogana.backoffice.domain.FaceSectionDetail">
+            SELECT
+                    ID
+                  , DETAIL_NAME
+                  , PRICE
+                  , REG_DTS
+                  , MOD_DTS
+            FROM FACE_SECTION_DETAIL
+    </select>
+    <select id="deleteFSD" parameterType="int" resultType="int">
+            DELETE FROM FACE_SECTION_DETAIL
+            WHERE 1  = 1
+            AND   ID = #{id}
+    </select>
+    <insert id="mergeFSD" parameterType="com.ogana.backoffice.domain.FaceSectionDetail">
+        MERGE INTO FACE_SECTION_DETAIL FSD
+        USING(
+            SELECT
+                    #{id} AS ID
+                  , #{detailName} AS DETAIL_NAME
+                  , #{price} AS PRICE
+                  , SYSDATE AS MOD_DTS
+            FROM DUAL
+        ) A
+        ON (FSD.ID = A.ID)
+        WHEN MATCHED THEN
+            UPDATE SET
+              , DETAIL_NAME = A.DETAIL_NAME
+              , PRICE = A.PRICE
+                MOD_DTS = SYDATE
+        WHEN NOT MATCHED THEN
+            INSERT(
+                ID, DETAIL_NAME, PRICE, REG_DTS, MOD_DTS
+            )
+            VALUES(
+                  (SELECT NVL(MAX(ID), 0) FROM FACE_SECTION_DETAIL)
+                , A.DETAIL_NAME
+                , A.PRICE
+                , SYSDATE
+                , SYSDATE
+            )
+    </insert>
+</mapper>

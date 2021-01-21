@@ -1,7 +1,7 @@
 package com.ogana.backoffice.controller;
 
 import com.ogana.backoffice.domain.Admin;
-import com.ogana.backoffice.domain.FaceDetailSection;
+import com.ogana.backoffice.domain.FaceSectionDetail;
 import com.ogana.backoffice.domain.GridDto;
 import com.ogana.backoffice.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/boc")
-public class MainController {
+public class BocMainController {
 
     private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
@@ -31,24 +31,14 @@ public class MainController {
 
     @GetMapping("/search/faceInfo")
     @ResponseBody
-    public GridDto<FaceDetailSection> searchFaceInfo() {
-        FaceDetailSection f1 = new FaceDetailSection(1L, "f1", new BigDecimal(100));
-        FaceDetailSection f2 = new FaceDetailSection(2L, "f2", new BigDecimal(200));
-        FaceDetailSection f3 = new FaceDetailSection(3L, "f3", new BigDecimal(300));
-        FaceDetailSection f4 = new FaceDetailSection(4L, "f4", new BigDecimal(400));
+    public GridDto<FaceSectionDetail> searchFaceInfo() {
+        FaceSectionDetail f1 = new FaceSectionDetail("f1", new BigDecimal(100));
+        FaceSectionDetail f2 = new FaceSectionDetail("f2", new BigDecimal(200));
+        FaceSectionDetail f3 = new FaceSectionDetail("f3", new BigDecimal(300));
+        FaceSectionDetail f4 = new FaceSectionDetail("f4", new BigDecimal(400));
 
-        List<FaceDetailSection> list = List.of(f1, f2, f3, f4);
+        List<FaceSectionDetail> list = List.of(f1, f2, f3, f4);
         return new GridDto<>(1, list.size(), true, list);
-    }
-
-    @GetMapping("/face-section")
-    public String searchFaceSection() {
-        return "/boc/face-section";
-    }
-
-    @GetMapping("/face-section-detail")
-    public String searchFaceSectionDetail() {
-        return "/boc/face-section-detail";
     }
 
     @GetMapping("/login")
